@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <style>
+      [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        border: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div contenteditable="true">
+      [Start editing here...]
+    </div>
+  </body>
+
+  <script>
+    require('./editor.js')
+    require('./renderer.js')
+  </script>
+</html>
