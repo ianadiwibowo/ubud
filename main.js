@@ -3,6 +3,8 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window
 const BrowserWindow = electron.BrowserWindow;
+// Module to manage menu
+const Menu = electron.Menu;
 
 const path = require('path');
 const url = require('url');
@@ -40,6 +42,7 @@ function createWindow () {
 // Some APIs can only be used after this event occurs
 app.on('ready', function onReady() {
   createWindow();
+  Menu.setApplicationMenu(menu);
 });
 
 // Quit when all windows are closed
@@ -59,5 +62,103 @@ app.on('activate', function onActivate() {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here
+// Manage application menu
+const template = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Save',
+        accelerator: 'CmdOrCtrl+S',
+        click() {
+          // Call save function in editor window
+          mainWindow.webContents.send('save');
+        }
+      }
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: [
+      {role: 'undo'},
+      {role: 'redo'},
+      {type: 'separator'},
+      {role: 'cut'},
+      {role: 'copy'},
+      {role: 'paste'},
+      {role: 'pasteandmatchstyle'},
+      {role: 'delete'},
+      {role: 'selectall'}
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {role: 'reload'},
+      {role: 'forcereload'},
+      {role: 'toggledevtools'},
+      {type: 'separator'},
+      {role: 'resetzoom'},
+      {role: 'zoomin'},
+      {role: 'zoomout'},
+      {type: 'separator'},
+      {role: 'togglefullscreen'}
+    ]
+  },
+  {
+    role: 'window',
+    submenu: [
+      {role: 'minimize'},
+      {role: 'close'}
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click () { require('electron').shell.openExternal('https://electron.atom.io') }
+      }
+    ]
+  }
+];
+
+if (process.platform === 'darwin') {
+  template.unshift({
+    label: app.getName(),
+    submenu: [
+      {role: 'about'},
+      {type: 'separator'},
+      {role: 'services', submenu: []},
+      {type: 'separator'},
+      {role: 'hide'},
+      {role: 'hideothers'},
+      {role: 'unhide'},
+      {type: 'separator'},
+      {role: 'quit'}
+    ]
+  })
+
+  // Edit menu
+  template[2].submenu.push(
+    {type: 'separator'},
+    {
+      label: 'Speech',
+      submenu: [
+        {role: 'startspeaking'},
+        {role: 'stopspeaking'}
+      ]
+    }
+  )
+
+  // Window menu
+  template[3].submenu = [
+    {role: 'close'},
+    {role: 'minimize'},
+    {role: 'zoom'},
+    {type: 'separator'},
+    {role: 'front'}
+  ]
+}
+
+const menu = Menu.buildFromTemplate(template);

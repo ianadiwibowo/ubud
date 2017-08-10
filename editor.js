@@ -4,9 +4,11 @@ window.$ = window.jQuery = require('jquery');
 const mousetrap = require('mousetrap');
 // Module to deal with filesystem
 const fs = require('fs');
+// Module for interprocess connection between main.js and editor.js
+const {ipcRenderer} = require('electron');
 
-// Register 'Cmd+S' and 'Ctrl+S' shortcuts listener to save file
-mousetrap.bind(['command+s', 'ctrl+s'], function onShortcutPressed() {
+// Save file
+ipcRenderer.on('save', (event, arg) => {
   var text = $('#editor-div').html().trim();
 
   fs.writeFile('./saved-tes-file.ubud', text, function onSuccess(err) {
@@ -16,4 +18,4 @@ mousetrap.bind(['command+s', 'ctrl+s'], function onShortcutPressed() {
     alert('File \"saved-tes-file.ubud\" saved.'); // DEBUG
     fs.close();
   });
-});
+})
