@@ -7,6 +7,7 @@
   <title>Hello World!</title>
   <link rel="stylesheet" type="text/css" href="assets/css/global.css" />
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
   <style>
     [contenteditable="true"]:active,
     [contenteditable="true"]:focus {
@@ -18,15 +19,43 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
-
+      <div class="col"></div>
+      <div class="col-6" id="toolbar">
+        <select class="custom-select" data-dropup-auto=false>
+          <option value="1" selected>Scene Heading</option>
+          <option value="2">Action</option>
+          <option value="3">Character</option>
+          <option value="4">Dialog</option>
+          <option value="5">Parenthetical</option>
+          <option value="6">Transition</option>
+          <option value="7">Dual Dialog</option>
+        </select>
+        <button type="button" class="btn btn-light">
+          <i class="fa fa-bold" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-light">
+          <i class="fa fa-italic" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-light">
+          <i class="fa fa-underline" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-light">
+          <i class="fa fa-font" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-light">
+          <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        </button>
       </div>
+      <div class="col"></div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col"></div>
       <div id="editor-div" contenteditable="true" class="col-6 mousetrap">
         All right, Mr. DeMille, I’m ready for my closeup.
       </div>
-      <div class="col">
-
-      </div>
+      <div class="col"></div>
     </div>
   </div>
 </body>
