@@ -40,3 +40,36 @@ h1 {
   margin: 0px 0px 20px 0px;
   border-bottom: solid 1px #EAEAEA;
 }
+
+h2 {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  text-align: right !important;
+}
+
+h3 {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  background-color: #EFEFEF !important;
+  border-radius: 4px !important;
+  padding: 10px 10px 5px 10px !important;
+  margin: 0px -10px 15px -10px !important;
+}
+
+h4 {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  margin: 0px !important;
+}
+
+.dialogue {
+  text-align: center;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.parenthetical {
+  margin: 0px !important;
+}
