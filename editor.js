@@ -1,12 +1,12 @@
-// jQuery
+// jQuery, for everything
 window.$ = window.jQuery = require('jquery');
-// Module to register keyboard shortcuts
+// Moustrap, for keyboard shortcuts not covered in the app menu
 const mousetrap = require('mousetrap');
 // Module to deal with filesystem
 const fs = require('fs');
-// Module for interprocess connection between main.js and editor.js
+// Module to connect main.js and editor.js
 const {ipcRenderer} = require('electron');
-// Fountain.js parser
+// Fountain.js, for parsing fountain format
 fountain = require('./lib/fountain.js');
 
 // Save file
@@ -22,7 +22,7 @@ ipcRenderer.on('save', (event, arg) => {
   });
 });
 
-// Editor text type shortcuts 'Cmd/Ctrl+1' to 'Cmd/Ctrl+7'
+// Editor Text Type shortcuts 'Cmd/Ctrl+1' to 'Cmd/Ctrl+7'
 var editorTextType = $('#editor-text-type');
 mousetrap.bind(['command+1', 'ctrl+1'], function onCmdOrCtrl1Pressed() {
   $('#editor-text-type option')
@@ -65,6 +65,11 @@ mousetrap.bind(['command+7', 'ctrl+7'], function onCmdOrCtrl7Pressed() {
     .removeAttr('selected')
     .filter('[value=7]')
     .attr('selected', true);
+});
+
+// Underline shortcut 'Cmd/Ctrl+U'
+mousetrap.bind(['command+u', 'ctrl+u'], function onCmdOrCtrlUPressed() {
+  document.execCommand('underline', false, '');
 });
 
 // Load initial file
