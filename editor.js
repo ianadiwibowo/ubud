@@ -23,7 +23,6 @@ ipcRenderer.on('save', (event, arg) => {
 });
 
 // Editor Text Type shortcuts 'Cmd/Ctrl+1' to 'Cmd/Ctrl+7'
-var editorTextType = $('#editor-text-type');
 mousetrap.bind(['command+1', 'ctrl+1'], function onCmdOrCtrl1Pressed() {
   $('#editor-text-type option')
     .removeAttr('selected')
@@ -69,6 +68,21 @@ mousetrap.bind(['command+7', 'ctrl+7'], function onCmdOrCtrl7Pressed() {
 
 // Underline shortcut 'Cmd/Ctrl+U'
 mousetrap.bind(['command+u', 'ctrl+u'], function onCmdOrCtrlUPressed() {
+  document.execCommand('underline', false, '');
+});
+
+// Button editor-button-bold onclick event
+$('#editor-button-bold').click(function onButtonBoldClick() {
+  document.execCommand('bold', false, '');
+});
+
+// Button editor-button-italic onclick event
+$('#editor-button-italic').click(function onButtonItalicClick() {
+  document.execCommand('italic', false, '');
+});
+
+// Button editor-button-underline onclick event
+$('#editor-button-underline').click(function onButtonUnderlineClick() {
   document.execCommand('underline', false, '');
 });
 
