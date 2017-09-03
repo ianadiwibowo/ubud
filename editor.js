@@ -9,19 +9,6 @@ const {ipcRenderer} = require('electron');
 // Fountain.js, for parsing fountain format
 fountain = require('./lib/fountain.js');
 
-// Save file
-ipcRenderer.on('save', (event, arg) => {
-  var text = $('#editor-div').html().trim();
-
-  fs.writeFile('./saved-tes-file.ubud', text, function onSuccess(err) {
-    if(err)
-      return console.log(err); // DEBUG
-
-    alert('File \"saved-tes-file.ubud\" saved.'); // DEBUG
-    fs.close();
-  });
-});
-
 // Editor Text Type shortcuts 'Cmd/Ctrl+1' to 'Cmd/Ctrl+7'
 mousetrap.bind(['command+1', 'ctrl+1'], function onCmdOrCtrl1Pressed() {
   $('#editor-text-type option')
@@ -90,5 +77,23 @@ $('#editor-button-underline').click(function onButtonUnderlineClick() {
 fs.readFile('./samples/brick&steel.fountain', function onRead(err, data) {
   fountain.parse(data.toString(), function(screenplay) {
     $('#editor-div').html(screenplay.html.script);
+  });
+});
+
+// Save file
+ipcRenderer.on('save', (event, arg) => {
+  var text = $('#editor-div').html().trim();
+
+  // START reverse-fountain.js
+  // Scene Heading
+  // continue here...
+  // END reverse-fountain.js
+
+  fs.writeFile('./saved-tes-file.ubud', text, function onSuccess(err) {
+    if(err)
+      return console.log(err); // DEBUG
+
+    alert('File \"saved-tes-file.ubud\" is saved.'); // DEBUG
+    fs.close();
   });
 });
