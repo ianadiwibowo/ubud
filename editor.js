@@ -86,7 +86,24 @@ ipcRenderer.on('save', (event, arg) => {
 
   // START reverse-fountain.js
   // Scene Heading
-  // continue here...
+  text = text.replace(/<h3>/g, '');
+  text = text.replace(/<\/h3>/g, '\n');
+  // Action (& Dialog)
+  text = text.replace(/<p>/g, '');
+  text = text.replace(/<\/p>/g, '\n');
+  // Character
+  text = text.replace(/<h4>/g, '');
+  text = text.replace(/<\/h4>/g, '');
+  // Parentheses
+
+  // Dialog
+  text = text.replace(/<div class="dialogue">\n/g, '');
+  text = text.replace(/<\/div>\n/g, '');
+
+  // Transition
+  text = text.replace(/<h2>/g, '');
+  text = text.replace(/<\/h2>/g, '\n');
+
   // END reverse-fountain.js
 
   fs.writeFile('./saved-tes-file.ubud', text, function onSuccess(err) {
